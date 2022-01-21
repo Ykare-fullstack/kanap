@@ -3,10 +3,7 @@ console.log(window.localStorage);
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
 console.log(bufferLocalStorage);
-const positionEmptyCart = document.querySelector("#cart__items");
 
-
-displayCart();
 // Si le panier est vide
 function displayCart()
 {
@@ -17,8 +14,7 @@ function displayCart()
     else 
     {
     for (let produit in bufferLocalStorage){
-
-        document.getElementById("cart__item").insertAdjacentHTML('beforebegin',
+        document.getElementById("cart__items").insertAdjacentHTML('beforebegin',
 
                 '<article class="cart__item" data-id="{product-ID}" data-color="{product-color}">' +
                     '<div class="cart__item__img">' +
