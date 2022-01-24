@@ -71,20 +71,18 @@ displayPriceQuantityTotal();
 // modification de quantité
 function modifyQuantity() {
     let quantityArray = document.querySelectorAll(".itemQuantity");
+    console.table(quantityArray); 
 
     //scan de la page en cas de modification
     for (let i = 0; i < quantityArray.length; i++){
         quantityArray[i].addEventListener("change" , (event) => {
             event.preventDefault();
-            
-            let quantityArrayValue
-            //on cherche dans le buffer un élément n'ayant pas la même quantité
-            const found = bufferLocalStorage.find((item) => item.quantityArray[i].valueAsNumber !== bufferLocalStorage[i].quantity);
-
-            found.quantity = quantityArray[i].valueAsNumber;
-            bufferLocalStorage[i].quantity = found.quantity;
+             
+            bufferLocalStorage[i].quantity = quantityArray[i].valueAsNumber;
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
             alert('quantité modifiée');
+            location.reload();
+
         })
     }
 }
@@ -96,11 +94,12 @@ function itemSuppression() {
     for (let i = 0; i < document.querySelectorAll(".deleteItem").length; i++){
         document.querySelectorAll(".deleteItem")[i].addEventListener("click" , (event) => {
             event.preventDefault();
-
-            bufferLocalStorage = bufferLocalStorage.filter( item => item.idProduit !== bufferLocalStorage[i].idProduit || item.couleurProduit !== bufferLocalStorage[i].color );
-            
+        
+            bufferLocalStorage = bufferLocalStorage.splice(i,1);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
             alert('produit supprimé');
+            location.reload();
+
         })
     }
 }
