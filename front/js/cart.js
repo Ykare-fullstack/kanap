@@ -113,34 +113,36 @@ function formValidation(){
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
     let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
 
-    document.getElementById(firstName).addEventListener('onChange',function(){
+    let form = document.getElementsByClassName("cart__order__form");
+
+    form.firstName.addEventListener('onChange',function(){
 
         if(!commonRegExp.test(document.getElementById('firstName').value))
             document.getElementById("firstNameErrorMsg").innerHTML = 'champ non valide';
     });
 
-    document.getElementById(lastName).addEventListener('onChange',function(){
+   form.lastName.addEventListener('onChange',function(){
 
         if(!commonRegExp.test(document.getElementById('lastName').value))
             document.getElementById("lastNameErrorMsg").innerHTML = 'champ non valide';
 
     });
 
-    document.getElementById(city).addEventListener('onChange',function(){
+    form.city.addEventListener('onChange',function(){
 
         if(!commonRegExp.test(document.getElementById('city').value))
             document.getElementById("cityErrorMsg").innerHTML = 'champ non valide';
 
     });
 
-    document.getElementById(email).addEventListener('onChange',function(){
+    form.email.addEventListener('onChange',function(){
 
         if(!emailRegExp.test(document.getElementById('email').value))
             document.getElementById("emailErrorMsg").innerHTML = 'champ non valide';
 
     });
 
-    document.getElementById(address).addEventListener('onChange',function(){
+    form.address.addEventListener('onChange',function(){
 
         if(!addressRegExp.test(document.getElementById('address').value))
             document.getElementById("addressErrorMsg").innerHTML = 'champ non valide';
