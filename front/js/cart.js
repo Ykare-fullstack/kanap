@@ -113,15 +113,15 @@ function formValidation(){
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
     let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
 
-    document.getElementById(firstname).addEventListener('onChange',function(){
+    document.getElementById(firstName).addEventListener('onChange',function(){
 
-        if(!commonRegExp.test(document.getElementById('firstname').value))
+        if(!commonRegExp.test(document.getElementById('firstName').value))
             document.getElementById("firstNameErrorMsg").innerHTML = 'champ non valide';
     });
 
-    document.getElementById(lastname).addEventListener('onChange',function(){
+    document.getElementById(lastName).addEventListener('onChange',function(){
 
-        if(!commonRegExp.test(document.getElementById('lastname').value))
+        if(!commonRegExp.test(document.getElementById('lastName').value))
             document.getElementById("lastNameErrorMsg").innerHTML = 'champ non valide';
 
     });
