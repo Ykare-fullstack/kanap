@@ -115,7 +115,7 @@ function formValidation(){
 
     document.getElementById('firstName').addEventListener('Change',function(){
 
-        if(!commonRegExp.test(document.getElementById('firstName').value))
+        if(!commonRegExp.test(this))
             document.getElementById("firstNameErrorMsg").innerHTML = 'champ non valide';
     });
 
