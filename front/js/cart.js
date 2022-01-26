@@ -126,7 +126,7 @@ function formValidation(){
             document.getElementById("firstNameErrorMsg").innerHTML = 'champ non valide';
         }
         else{
-
+            document.getElementById("firstNameErrorMsg").innerHTML = '';
         }
     });
 
@@ -136,7 +136,7 @@ function formValidation(){
             document.getElementById("lastNameErrorMsg").innerHTML = 'champ non valide';
         }
         else{
-
+            document.getElementById("firstNameErrorMsg").innerHTML = '';
         }
 
     });
@@ -147,7 +147,7 @@ function formValidation(){
             document.getElementById("cityErrorMsg").innerHTML = 'champ non valide';
         }
         else{
-
+            document.getElementById("firstNameErrorMsg").innerHTML = '';
         }    
 
     });
@@ -158,7 +158,7 @@ function formValidation(){
             document.getElementById("emailErrorMsg").innerHTML = 'champ non valide';
         }
         else{
-
+            document.getElementById("firstNameErrorMsg").innerHTML = '';
         }
 
     });
@@ -169,7 +169,7 @@ function formValidation(){
             document.getElementById("addressErrorMsg").innerHTML = 'champ non valide';
         }
         else{
-
+            document.getElementById("firstNameErrorMsg").innerHTML = '';
         }
 
     });
