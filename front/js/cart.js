@@ -203,7 +203,9 @@ function postForm(){
             },
             products: idProducts,
         } 
-       
+        console.table(order);
+
+        
         const postEnTete = {
             method: 'POST',
             body: JSON.stringify(order),
