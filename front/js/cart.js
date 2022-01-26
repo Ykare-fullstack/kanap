@@ -3,7 +3,7 @@ console.log(window.localStorage);
 //Initialisation du buffer de local storage
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
-console.log(bufferLocalStorage);
+
 
 
 function displayCart()
@@ -55,7 +55,7 @@ function displayPriceQuantityTotal(){
     }
 
     document.getElementById('totalQuantity').innerHTML = quantityTotal;
-    console.log(quantityTotal);
+
 
     // prix total = prix item * quantité item
     priceTotal = 0;
@@ -65,7 +65,7 @@ function displayPriceQuantityTotal(){
     }
 
     document.getElementById('totalPrice').innerHTML = priceTotal;
-    console.log(priceTotal);
+
 }
 displayPriceQuantityTotal();
 
@@ -83,7 +83,7 @@ function modifyQuantity() {
             bufferLocalStorage[i].quantity = quantityArray[i].valueAsNumber;
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
 
-            console.table(bufferLocalStorage);
+
             location.reload();
 
         })
@@ -103,7 +103,7 @@ function itemSuppression() {
             bufferLocalStorage.splice(i,1);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
 
-            console.table(bufferLocalStorage);
+
             location.reload();
 
         })
@@ -184,6 +184,7 @@ function postForm(){
     //au clic sur "commander"
     document.getElementById("order").addEventListener("click", (event)=>{
     
+        event.preventDefault();
 
         //Création d'un tableau des id produits depuis le buffer du local storage
         let idProducts = [];
@@ -217,14 +218,15 @@ function postForm(){
 
         fetch("http://localhost:3000/api/products/order", postEnTete)
         .then((response) => response.json())
-        .then((data) => {
+        .then((order) => {
             localStorage.clear();
-            localStorage.setItem("orderId", data.orderId);
+            localStorage.setItem("orderId", order.orderId);
+            console.log(localStorage);
 
             document.location.href = "confirmation.html";
         })
         .catch((err) => {
-            alert ("Bug Fetch");
+            alert ("Bug Fetch" + err.message);
         });
     })
 }
