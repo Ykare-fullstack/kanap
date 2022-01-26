@@ -1,10 +1,11 @@
+
 console.log(window.localStorage);
 //Initialisation du buffer de local storage
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
 console.log(bufferLocalStorage);
 
-// Si le panier est vide
+
 function displayCart()
 {
     if (bufferLocalStorage === null || bufferLocalStorage == 0) 
@@ -41,7 +42,8 @@ function displayCart()
 }
 
 displayCart();
-
+//---------------------------------------------------------------------------------
+//affichage du prix total
 function displayPriceQuantityTotal(){
 
     // scan de la page et incrémentation de la quantité
@@ -67,8 +69,8 @@ function displayPriceQuantityTotal(){
 }
 displayPriceQuantityTotal();
 
-
-// modification de quantité
+//---------------------------------------------------------------------------------
+// modification de quantité d'un produit
 function modifyQuantity() {
     let quantityArray = document.querySelectorAll(".itemQuantity");
     console.table(quantityArray); 
@@ -80,7 +82,8 @@ function modifyQuantity() {
 
             bufferLocalStorage[i].quantity = quantityArray[i].valueAsNumber;
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-            alert('quantité modifiée');
+
+            console.table(bufferLocalStorage);
             location.reload();
 
         })
@@ -88,6 +91,8 @@ function modifyQuantity() {
 }
 modifyQuantity();
 
+
+//---------------------------------------------------------------------------------
 // Suppression d'un produit
 function itemSuppression() {
 
@@ -97,7 +102,6 @@ function itemSuppression() {
         
             bufferLocalStorage.splice(i,1);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-            alert('produit supprimé');
 
             console.table(bufferLocalStorage);
             location.reload();
@@ -107,45 +111,120 @@ function itemSuppression() {
 }
 itemSuppression();
 
+
+//---------------------------------------------------------------------------------
+//Validation du formulaire
 function formValidation(){
     
-    let commonRegExp = new RegExp("/^[a-z ,.'-]+$/i");
-    let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
+    let commonRegExp = new RegExp("^[a-z ,.'-]+$/i");
+    let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$");
     let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
+    let fieldVerification = false;
+    document.getElementById('firstName').addEventListener("change",function(){
 
-    document.getElementById('firstName').addEventListener('Change',function(){
-
-        if(!commonRegExp.test(this))
+        if(!commonRegExp.test(document.getElementById('firstName').value)){
             document.getElementById("firstNameErrorMsg").innerHTML = 'champ non valide';
+        }
+        else{
+
+        }
     });
 
-    document.getElementById('lastName').addEventListener('Change',function(){
+    document.getElementById('lastName').addEventListener("change",function(){
 
-        if(!commonRegExp.test(document.getElementById('lastName').value))
+        if(!commonRegExp.test(document.getElementById('lastName').value)){
             document.getElementById("lastNameErrorMsg").innerHTML = 'champ non valide';
+        }
+        else{
+
+        }
 
     });
 
-    document.getElementById('city').addEventListener('Change',function(){
+    document.getElementById('city').addEventListener("change",function(){
 
-        if(!commonRegExp.test(document.getElementById('city').value))
+        if(!commonRegExp.test(document.getElementById('city').value)){
             document.getElementById("cityErrorMsg").innerHTML = 'champ non valide';
+        }
+        else{
+
+        }    
 
     });
 
-    document.getElementById('email').addEventListener('Change',function(){
+    document.getElementById('email').addEventListener("change",function(){
 
-        if(!emailRegExp.test(document.getElementById('email').value))
+        if(!emailRegExp.test(document.getElementById('email').value)){
             document.getElementById("emailErrorMsg").innerHTML = 'champ non valide';
+        }
+        else{
+
+        }
 
     });
 
-    document.getElementById('address').addEventListener('Change',function(){
+    document.getElementById('address').addEventListener("change",function(){
 
-        if(!addressRegExp.test(document.getElementById('address').value))
+        if(!addressRegExp.test(document.getElementById('address').value)){
             document.getElementById("addressErrorMsg").innerHTML = 'champ non valide';
+        }
+        else{
+
+        }
 
     });
 }
 formValidation();
 
+//---------------------------------------------------------------------------------
+//Envoi des informations client au localstorage
+
+function postForm(){
+
+    //au clic sur "commander"
+    document.getElementById("order").addEventListener("click", (event)=>{
+    
+
+        //Création d'un tableau des id produits depuis le buffer du local storage
+        let idProducts = [];
+        for (let i = 0; i<bufferLocalStorage.length;i++) {
+            idProducts.push(bufferLocalStorage[i].idProduit);
+        }
+        console.log(idProducts);
+
+        //Création de l'objet "order" avec les infos clients du formulaire
+        const order = {
+            contact : {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                email: document.getElementById('email').value,
+            },
+            products: idProducts,
+        } 
+       
+        const postEnTete = {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: {
+                'Accept': 'application/json', 
+                "Content-Type": "application/json" 
+            },
+        };
+
+        fetch("http://localhost:3000/api/products/order", postEnTete)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            localStorage.clear();
+            localStorage.setItem("orderId", data.orderId);
+
+            document.location.href = "confirmation.html";
+        })
+        .catch((err) => {
+            alert ("Bug Fetch");
+        });
+    })
+}
+postForm();
