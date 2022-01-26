@@ -218,7 +218,6 @@ function postForm(){
         fetch("http://localhost:3000/api/products/order", postEnTete)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
 
