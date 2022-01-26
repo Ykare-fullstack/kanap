@@ -205,7 +205,7 @@ function postForm(){
         } 
         console.table(order);
 
-        
+
         const postEnTete = {
             method: 'POST',
             body: JSON.stringify(order),
@@ -222,7 +222,7 @@ function postForm(){
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
 
-            document.location.href = "confirmation.html";
+            window.location.replace("confirmation.html");
         })
         .catch((err) => {
             alert ("Bug Fetch");
