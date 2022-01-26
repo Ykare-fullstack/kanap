@@ -116,7 +116,7 @@ itemSuppression();
 //Validation du formulaire
 function formValidation(){
     
-    let commonRegExp = new RegExp("^[a-z ,.'-]+$/i");
+    let commonRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
     let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$");
     let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     let fieldVerification = false;
