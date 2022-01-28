@@ -10,37 +10,19 @@ async function retrieveItems() {
 async function fillPageWithItems () {
     var list = await retrieveItems()
     .then(function (listAPI) {               
-        const itemList = listAPI;
 
+        for (let item in listAPI)  {
 
-        for (let item in itemList)  {
+            document.getElementById("items").insertAdjacentHTML("beforeEnd",
 
-
-            let linkTag = document.createElement("a");
-            document.querySelector(".items").appendChild(linkTag);
-            linkTag.href = `product.html?id=${listAPI[item]._id}`;
-
-
-            let articleTag = document.createElement("article");
-            linkTag.appendChild(articleTag);
-
-
-            let thumbnailImg = document.createElement("img");
-            articleTag.appendChild(thumbnailImg);
-            thumbnailImg.src = listAPI[item].imageUrl;
-            thumbnailImg.alt = listAPI[item].altTxt;
-
-
-            let productName = document.createElement("h3");
-            articleTag.appendChild(productName);
-            productName.classList.add("productName");
-            productName.innerHTML = listAPI[item].name;
-
-
-            let descriptionTag = document.createElement("p");
-            articleTag.appendChild(descriptionTag);
-            descriptionTag.classList.add("productName");
-            descriptionTag.innerHTML = listAPI[item].description;
+                '<a href="product.html?id='+listAPI[item]._id+'">' +
+                    '<article>' +
+                        '<img src="'+listAPI[item].imageUrl+'" alt="'+listAPI[item].altTxt+'">' +
+                        '<h3 class="productName">'+listAPI[item].name+'</h3>' +
+                        '<p class="productDescription">'+listAPI[item].description+'</p>' +
+                    '</article>' +
+                '</a>'
+            );
         }
     });
 }

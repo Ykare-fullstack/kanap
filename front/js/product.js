@@ -38,7 +38,9 @@ function addToCart() {
 
     //eventListener implémenté au click "ajouter au panier" si 0<quantité<100
     document.getElementById('addToCart').addEventListener("click", (evenement)=>{
-        if(document.getElementById('quantity').value>0 && document.getElementById('quantity').value<100 && document.getElementById('quantity').value!=0){
+        if(document.getElementById('colors').value == 0)
+            alert("veuillez sélectionner un couleur");
+        if(document.getElementById('quantity').value>0 && document.getElementById('quantity').value<100 && document.getElementById('quantity').value!=0 && document.getElementById('colors').value != 0){
 
 
     //Récupération des options de l'article à ajouter au panier
@@ -69,8 +71,7 @@ function addToCart() {
 
             found.quantity = parseInt(productToAdd.quantity) + parseInt(found.quantity);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-
-            alert('produit déja dans le panier');
+            alert('produit ajouté au panier existant');
 
         //si nouveau produit dans le panier
         } else {
@@ -86,7 +87,8 @@ function addToCart() {
         bufferLocalStorage =[];
         bufferLocalStorage.push(productToAdd);
         window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-
+        alert('nouveau produit dans le panier');
+        
     }}});   
 }
 
