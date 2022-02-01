@@ -71,7 +71,7 @@ function addToCart() {
 
             found.quantity = parseInt(productToAdd.quantity) + parseInt(found.quantity);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-            alert('produit ajouté au panier existant');
+            alert('produit'+ productToAdd.name +'ajouté au panier existant');
 
         //si nouveau produit dans le panier
         } else {
@@ -79,7 +79,7 @@ function addToCart() {
             bufferLocalStorage.push(productToAdd);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
 
-            alert('nouveau produit dans le panier');
+            alert('nouveau produit'+ productToAdd.name +'dans le panier');
         }
     //Si le panier est vide
     } else {
@@ -87,7 +87,7 @@ function addToCart() {
         bufferLocalStorage =[];
         bufferLocalStorage.push(productToAdd);
         window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-        alert('nouveau produit dans le panier');
+        alert('nouveau produit'+ productToAdd.name +'dans le panier');
         
     }}});   
 }

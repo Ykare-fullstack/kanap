@@ -9,7 +9,7 @@ async function retrieveItems() {
 //fonction de récupération de la promise de l'API séparation dans un tableau et affichage dans la page d'accueil
 async function fillPageWithItems () {
     var list = await retrieveItems()
-    .then(function (listAPI) {               
+    .then(function (listAPI) {
 
         for (let item in listAPI)  {
 
@@ -26,5 +26,4 @@ async function fillPageWithItems () {
         }
     });
 }
-console.log(window.localStorage); 
 fillPageWithItems();
