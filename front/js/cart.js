@@ -3,7 +3,11 @@ console.log(window.localStorage);
 //Initialisation du buffer de local storage
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
-
+let fieldVerificationFirstName = false;
+let fieldVerificationLastName = false;
+let fieldVerificationCity = false;
+let fieldVerificationEmail = false;
+let fieldVerificationAddress = false;
 
 
 function displayCart()
@@ -136,11 +140,7 @@ function formValidation(){
     let commonRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
     let emailRegExp = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$");
     let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
-    let fieldVerificationFirstName = false;
-    let fieldVerificationLastName = false;
-    let fieldVerificationCity = false;
-    let fieldVerificationEmail = false;
-    let fieldVerificationAddress = false;
+    
     document.getElementById('firstName').addEventListener("change",function(){
 
         if(!commonRegExp.test(document.getElementById('firstName').value)){
