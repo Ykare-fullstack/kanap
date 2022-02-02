@@ -262,5 +262,8 @@ function postForm(){
             });
         })
     }
+    else{
+        alert('veuillez remplir le formulaire afin de valider la commande');
+    }
 }
 postForm();
