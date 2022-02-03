@@ -124,13 +124,14 @@ async function retrieveItems(id) {
 
 //Fonction de calcul du prix total selon les données de L'API (via retrieveItems)
 function fectchPrices(){
-    
-    let APIPrice = 0;
+    let priceVerification = true;
+
     for(let item in bufferLocalStorage){
-            APIPrice = APIPrice + retrieveItems(item.id).price;
+        if(retrieveItems(item.id).price != item.price)
+            priceVerification = false;
     }
     console.log-APIPrice;
-    return APIPrice;       
+    return priceVerification;       
 }
 
 //---------------------------------------------------------------------------------
@@ -212,7 +213,7 @@ formValidation();
 
 function postForm(){
 
-    if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && fectchPrices()==document.getElementById('totalPrice').value){
+    if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && priceVerification){
         //au clic sur "commander"
         document.getElementById("order").addEventListener("click", (event)=>{
         
