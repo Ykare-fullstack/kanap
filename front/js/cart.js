@@ -119,6 +119,7 @@ itemSuppression();
 //fonction de récupération des éléments de l'API
 async function retrieveItem(id) {
     var res = await fetch("http://localhost:3000/api/products", id);
+    
     return await res.json();
 }
 
@@ -127,13 +128,13 @@ function fectchPrices(){
     let priceVerification = true;
 
     for(let item in bufferLocalStorage){
-        console.log(retrieveItems(item.id).price);
+        console.log(retrieveItem(item.id).price);
         console.log(item.price);
 
         if(retrieveItem(item.id).price != item.price)
             priceVerification = false;
     }
-    console.log-APIPrice;
+    console.log(priceVerification);
     return priceVerification;       
 }
 
