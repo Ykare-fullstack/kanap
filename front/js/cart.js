@@ -216,7 +216,7 @@ formValidation();
 
 function postForm(){
 
-    if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && priceVerification){
+    if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && fectchPrices()){
         //au clic sur "commander"
         document.getElementById("order").addEventListener("click", (event)=>{
         
