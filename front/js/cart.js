@@ -131,7 +131,7 @@ async function fectchPrices(){
         console.log(await retrieveItem(item.id).price);
         console.log(item.price);
 
-        if(await retrieveItem(item.id).price != item.price)
+        if(await retrieveItem(item.id).price.value != item.price.value)
             priceVerification = false;
     }
     console.log(priceVerification);
