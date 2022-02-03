@@ -217,58 +217,60 @@ formValidation();
 
 function postForm(){
 
-    if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && fectchPrices()){
+    
         //au clic sur "commander"
         document.getElementById("order").addEventListener("click", (event)=>{
         
-            event.preventDefault();
+            if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && fectchPrices()){
+                event.preventDefault();
 
-            //Création d'un tableau des id produits depuis le buffer du local storage
-            let idProducts = [];
-            for (let i = 0; i<bufferLocalStorage.length;i++) {
-                idProducts.push(bufferLocalStorage[i].idProduit);
+                //Création d'un tableau des id produits depuis le buffer du local storage
+                let idProducts = [];
+                for (let i = 0; i<bufferLocalStorage.length;i++) {
+                    idProducts.push(bufferLocalStorage[i].idProduit);
+                }
+                console.log(idProducts);
+
+                //Création de l'objet "order" avec les infos clients du formulaire
+                var order = {
+                    contact : {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        address: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        email: document.getElementById('email').value,
+                    },
+                    products: idProducts,
+                } 
+                console.table(order);
+
+
+                const postEnTete = {
+                    method: 'POST',
+                    body: JSON.stringify(order),
+                    headers: {
+                        'Accept': 'application/json', 
+                        "Content-Type": "application/json"
+                    },
+                };
+
+                fetch("http://localhost:3000/api/products/order", postEnTete)
+                .then((response) => response.json())
+                .then((order) => {
+                    localStorage.clear();
+                    localStorage.setItem("orderId", order.orderId);
+                    console.log(localStorage);
+
+                    document.location.href = "confirmation.html";
+                })
+                .catch((err) => {
+                    alert ("Bug Fetch" + err.message);
+                });
             }
-            console.log(idProducts);
-
-            //Création de l'objet "order" avec les infos clients du formulaire
-            var order = {
-                contact : {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    address: document.getElementById('address').value,
-                    city: document.getElementById('city').value,
-                    email: document.getElementById('email').value,
-                },
-                products: idProducts,
-            } 
-            console.table(order);
-
-
-            const postEnTete = {
-                method: 'POST',
-                body: JSON.stringify(order),
-                headers: {
-                    'Accept': 'application/json', 
-                    "Content-Type": "application/json"
-                },
-            };
-
-            fetch("http://localhost:3000/api/products/order", postEnTete)
-            .then((response) => response.json())
-            .then((order) => {
-                localStorage.clear();
-                localStorage.setItem("orderId", order.orderId);
-                console.log(localStorage);
-
-                document.location.href = "confirmation.html";
-            })
-            .catch((err) => {
-                alert ("Bug Fetch" + err.message);
-            });
+            else{
+                alert("veuillez remplir le formulaire de commande");
+            }
         })
-    }
-    else{
-        alert('veuillez remplir le formulaire afin de valider la commande');
-    }
+    
 }
 postForm();
