@@ -39,7 +39,7 @@ function addToCart() {
     //eventListener implémenté au click "ajouter au panier" si 0<quantité<100
     document.getElementById('addToCart').addEventListener("click", (evenement)=>{
         if(document.getElementById('colors').value == 0)
-            alert("veuillez sélectionner un couleur");
+            alert("veuillez sélectionner une couleur");
         if(document.getElementById('quantity').value>0 && document.getElementById('quantity').value<100 && document.getElementById('quantity').value!=0 && document.getElementById('colors').value != 0){
 
 
@@ -79,7 +79,7 @@ function addToCart() {
             bufferLocalStorage.push(productToAdd);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
 
-            alert('nouveau produit '+ productToAdd.name +' dans le panier');
+            alert('nouveau produit '+ productToAdd.name +' dans le panier existant');
         }
     //Si le panier est vide
     } else {
