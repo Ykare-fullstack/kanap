@@ -117,14 +117,12 @@ function itemSuppression() {
 itemSuppression();
 
 
-//Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems ci-dessus)
+//Fonction de vérification du prix de chaque article du panier selon les données de L'API
 async function fectchPrices(){
     let priceVerification = true;
 
-    let priceTestBuffer = JSON.parse(window.localStorage.getItem("produit"));
-    console.table(priceTestBuffer);
 
-    for(let produit in priceTestBuffer){
+    for(let produit in bufferLocalStorage){
 
         console.log(produit);
         console.log(produit.idProduit);
