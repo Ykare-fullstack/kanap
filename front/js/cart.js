@@ -124,7 +124,7 @@ async function retrieveItem(id) {
 }
 
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems ci-dessus)
-async function fectchPrices(){
+function fectchPrices(){
     let priceVerification = true;
     let itemParsedFromAPI;
     bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
@@ -133,7 +133,7 @@ async function fectchPrices(){
     for(let itemInBuffer in bufferLocalStorage){
 
         console.log(itemInBuffer.id);
-        itemParsedFromAPI = JSON.parse(await retrieveItem(itemInBuffer.id));
+        itemParsedFromAPI = JSON.parse(retrieveItem(itemInBuffer.id));
         console.log(itemParsedFromAPI);
 
         if(itemParsedFromAPI.price.value != itemInBuffer.price.value)
