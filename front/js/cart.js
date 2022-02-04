@@ -121,10 +121,11 @@ itemSuppression();
 async function fectchPrices(){
     let priceVerification = true;
 
+    console.log(bufferLocalStorage);
 
-    for(let produit in bufferLocalStorage){
+    for(let produit of bufferLocalStorage){
 
-        console.log(produit);
+        console.table(produit);
         console.log(produit.idProduit);
         
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
