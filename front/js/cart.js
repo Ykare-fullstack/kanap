@@ -81,8 +81,6 @@ displayPriceQuantityTotal();
 // modification de quantité d'un produit
 function modifyQuantity() {
     let quantityArray = document.querySelectorAll(".itemQuantity");
-    console.table(quantityArray); 
-
     
     //scan de la page en cas de modification
     for (let i = 0; i < quantityArray.length; i++){
@@ -91,7 +89,6 @@ function modifyQuantity() {
 
             bufferLocalStorage[i].quantity = quantityArray[i].valueAsNumber;
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-
 
             location.reload();
 
@@ -112,7 +109,6 @@ function itemSuppression() {
             bufferLocalStorage.splice(i,1);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
 
-
             location.reload();
 
         })
@@ -129,17 +125,17 @@ async function retrieveItem(id) {
 }
 
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems ci-dessus)
-async function fectchPrices(){
+function fectchPrices(){
     let priceVerification = true;
 
-    bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
-    console.table(bufferLocalStorage);
+    let priceTestBuffer = JSON.parse(window.localStorage.getItem("produit"));
+    console.table(priceTestBuffer);
 
-    for(let itemInBuffer in bufferLocalStorage){
+    for(let itemInBuffer in priceTestBuffer){
 
-        itemFromAPI = await retrieveItem(itemInBuffer.idProduit);
+        itemFromAPI = retrieveItem(itemInBuffer.idProduit);
         console.log(itemFromAPI);
-        
+
         if(itemFromAPI.price.value != itemInBuffer.price.value)
             priceVerification = false;
     }
