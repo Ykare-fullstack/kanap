@@ -124,12 +124,12 @@ async function fectchPrices(){
     let priceTestBuffer = JSON.parse(window.localStorage.getItem("produit"));
     console.table(priceTestBuffer);
 
-    for(let itemInBuffer in priceTestBuffer){
+    for(let produit in priceTestBuffer){
 
-        console.log(itemInBuffer);
-        console.log(itemInBuffer.idProduit);
+        console.log(produit);
+        console.log(produit.idProduit);
         
-        fetch("http://localhost:3000/api/products/"+ itemInBuffer.idProduit)
+        fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
             return apiAnswer.json();
@@ -137,7 +137,7 @@ async function fectchPrices(){
         .then(async function (itemFromAPI) {
         console.log(itemFromAPI);
 
-        if(itemFromAPI.price.value != itemInBuffer.price.value)
+        if(itemFromAPI.price.value != produit.price.value)
             priceVerification = false;
         });
     }
