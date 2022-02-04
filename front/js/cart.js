@@ -11,6 +11,11 @@ let fieldVerificationAddress = false;
 
 function displayCart()
 {
+    document.getElementById('firstName').innerHTML='';
+    document.getElementById('lastName').innerHTML='';
+    document.getElementById('email').innerHTML='';
+    document.getElementById('city').innerHTML='';
+    document.getElementById('address').innerHTML='';
     if (bufferLocalStorage === null || bufferLocalStorage == 0) 
     { 
         document.getElementById('cart__items').innerHTML = '<p>Votre panier est vide</p>';
@@ -118,7 +123,7 @@ itemSuppression();
 
 //fonction de récupération d'un élément de l'API
 async function retrieveItem(id) {
-    var res = await fetch("http://localhost:3000/api/products",id);
+    var res = await fetch("http://localhost:3000/api/products"+ id);
     
     return await res.json();
 }
@@ -126,8 +131,6 @@ async function retrieveItem(id) {
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems ci-dessus)
 async function fectchPrices(){
     let priceVerification = true;
-    let itemParsedFromAPI;
-    let retrievedItem;
 
     bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
     console.table(bufferLocalStorage);
@@ -136,6 +139,7 @@ async function fectchPrices(){
 
         itemFromAPI = await retrieveItem(itemInBuffer.idProduit);
         console.log(itemFromAPI);
+        
         if(itemFromAPI.price.value != itemInBuffer.price.value)
             priceVerification = false;
     }
