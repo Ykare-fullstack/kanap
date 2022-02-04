@@ -136,6 +136,8 @@ async function fectchPrices(){
         .then(async function (itemFromAPI) {
         console.log(itemFromAPI);
 
+        console.log(itemFromAPI.price.value);
+        console.log(produit.price.value);
         if(itemFromAPI.price.value != produit.price.value)
             priceVerification = false;
         });
