@@ -126,6 +126,7 @@ async function fectchPrices(){
 
     for(let itemInBuffer in priceTestBuffer){
 
+        console.log(itemInBuffer);
         console.log(itemInBuffer.idProduit);
         
         fetch("http://localhost:3000/api/products/"+ itemInBuffer.idProduit)
