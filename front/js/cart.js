@@ -117,13 +117,6 @@ function itemSuppression() {
 itemSuppression();
 
 
-//fonction de récupération d'un élément de l'API
-async function retrieveItem(id) {
-    var res = await fetch("http://localhost:3000/api/products"+ id);
-    
-    return await res.json();
-}
-
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems ci-dessus)
 async function fectchPrices(){
     let priceVerification = true;
@@ -133,11 +126,17 @@ async function fectchPrices(){
 
     for(let itemInBuffer in priceTestBuffer){
 
-        itemFromAPI = await retrieveItem(itemInBuffer.idProduit);
+        fetch("http://localhost:3000/api/products/" + itemInBuffer.idProduit)
+        .then((apiAnswer) => {
+            console.log(apiAnswer);
+            return apiAnswer.json();
+        })
+        .then(async function (itemFromAPI) {
         console.log(itemFromAPI);
 
         if(itemFromAPI.price.value != itemInBuffer.price.value)
             priceVerification = false;
+        });
     }
     console.log(priceVerification);
     return priceVerification;       
