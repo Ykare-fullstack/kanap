@@ -9,7 +9,6 @@ let fieldVerificationCity = false;
 let fieldVerificationEmail = false;
 let fieldVerificationAddress = false;
 
-
 function displayCart()
 {
     if (bufferLocalStorage === null || bufferLocalStorage == 0) 
@@ -132,8 +131,8 @@ async function fectchPrices(){
     console.table(bufferLocalStorage);
 
     for(let item in bufferLocalStorage){
-        console.log(await retrieveItem(item.id).price.value);
-        console.log(item.price.value);
+
+        console.log(await retrieveItem(item.id));
 
         if(await retrieveItem(item.id).price.value != item.price.value)
             priceVerification = false;
@@ -226,13 +225,12 @@ function postForm(){
         document.getElementById("order").addEventListener("click", (event)=>{
             
             event.preventDefault();
-            
             //vérification de la validité du formulaire
             if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
                 
                 //vérification de la validité du prix de chaque produit du panier
                 if(fectchPrices()){
-                    
+                    console.log(item.price.value);
                     //Création d'un tableau des id produits du panier depuis le buffer du local storage
                     let idProducts = [];
                     for (let i = 0; i<bufferLocalStorage.length;i++) {
