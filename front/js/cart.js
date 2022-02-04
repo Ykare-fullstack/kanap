@@ -134,8 +134,9 @@ async function fectchPrices(){
 
     for(let itemInBuffer in bufferLocalStorage){
 
-
+        console.log(itemInBuffer.idProduit);
         retrievedItem = await retrieveItem(itemInBuffer.idProduit);
+        console.log(retrievedItem);
         itemParsedFromAPI = JSON.parse(retrievedItem);
 
         console.log(itemParsedFromAPI);
