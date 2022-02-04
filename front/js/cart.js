@@ -127,14 +127,18 @@ async function retrieveItem(id) {
 function fectchPrices(){
     let priceVerification = true;
     let itemParsedFromAPI;
+    let retrievedItem;
+
     bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
     console.table(bufferLocalStorage);
 
     for(let itemInBuffer in bufferLocalStorage){
 
-        console.log(itemInBuffer.id);
-        itemParsedFromAPI = JSON.parse(retrieveItem(itemInBuffer.id));
+        retrievedItem = retrieveItem(itemInBuffer.id);
+        itemParsedFromAPI = JSON.parse(retrievedItem);
+
         console.log(itemParsedFromAPI);
+        console.log(itemInBuffer.id);
 
         if(itemParsedFromAPI.price.value != itemInBuffer.price.value)
             priceVerification = false;
