@@ -79,6 +79,7 @@ function modifyQuantity() {
     let quantityArray = document.querySelectorAll(".itemQuantity");
     console.table(quantityArray); 
 
+    
     //scan de la page en cas de modification
     for (let i = 0; i < quantityArray.length; i++){
         quantityArray[i].addEventListener("change" , (event) => {
@@ -123,9 +124,11 @@ async function retrieveItem(id) {
     return await res.json();
 }
 
-//Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems)
+//Fonction de vérification du prix de chaque article du panier selon les données de L'API (via retrieveItems ci-dessus)
 async function fectchPrices(){
     let priceVerification = true;
+
+    bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
     for(let item in bufferLocalStorage){
         console.log(await retrieveItem(item.id).price);
@@ -220,57 +223,65 @@ function postForm(){
     
         //au clic sur "commander"
         document.getElementById("order").addEventListener("click", (event)=>{
-        
-            if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail && fectchPrices()){
-                event.preventDefault();
+            
+            event.preventDefault();
+            
+            //vérification de la validité du formulaire
+            if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
+                
+                //vérification de la validité du prix de chaque produit du panier
+                if(fectchPrices()){
+                    
+                    //Création d'un tableau des id produits du panier depuis le buffer du local storage
+                    let idProducts = [];
+                    for (let i = 0; i<bufferLocalStorage.length;i++) {
+                        idProducts.push(bufferLocalStorage[i].idProduit);
+                    }
+                    console.log(idProducts);
 
-                //Création d'un tableau des id produits depuis le buffer du local storage
-                let idProducts = [];
-                for (let i = 0; i<bufferLocalStorage.length;i++) {
-                    idProducts.push(bufferLocalStorage[i].idProduit);
+                    //Création de l'objet "order" avec les infos clients du formulaire
+                    var order = {
+                        contact : {
+                            firstName: document.getElementById('firstName').value,
+                            lastName: document.getElementById('lastName').value,
+                            address: document.getElementById('address').value,
+                            city: document.getElementById('city').value,
+                            email: document.getElementById('email').value,
+                        },
+                        products: idProducts,
+                    } 
+                    console.table(order);
+
+
+                    const postEnTete = {
+                        method: 'POST',
+                        body: JSON.stringify(order),
+                        headers: {
+                            'Accept': 'application/json', 
+                            "Content-Type": "application/json"
+                        },
+                    };
+
+                    fetch("http://localhost:3000/api/products/order", postEnTete)
+                    .then((response) => response.json())
+                    .then((order) => {
+                        localStorage.clear();
+                        localStorage.setItem("orderId", order.orderId);
+                        console.log(localStorage);
+
+                        document.location.href = "confirmation.html";
+                    })
+                    .catch((err) => {
+                        alert ("Bug Fetch" + err.message);
+                    });
                 }
-                console.log(idProducts);
-
-                //Création de l'objet "order" avec les infos clients du formulaire
-                var order = {
-                    contact : {
-                        firstName: document.getElementById('firstName').value,
-                        lastName: document.getElementById('lastName').value,
-                        address: document.getElementById('address').value,
-                        city: document.getElementById('city').value,
-                        email: document.getElementById('email').value,
-                    },
-                    products: idProducts,
-                } 
-                console.table(order);
-
-
-                const postEnTete = {
-                    method: 'POST',
-                    body: JSON.stringify(order),
-                    headers: {
-                        'Accept': 'application/json', 
-                        "Content-Type": "application/json"
-                    },
-                };
-
-                fetch("http://localhost:3000/api/products/order", postEnTete)
-                .then((response) => response.json())
-                .then((order) => {
-                    localStorage.clear();
-                    localStorage.setItem("orderId", order.orderId);
-                    console.log(localStorage);
-
-                    document.location.href = "confirmation.html";
-                })
-                .catch((err) => {
-                    alert ("Bug Fetch" + err.message);
-                });
+                else{
+                    alert("erreur de prix du produit");
+                }
             }
             else{
                 alert("veuillez remplir le formulaire de commande");
             }
-        })
-    
+        })  
 }
 postForm();
