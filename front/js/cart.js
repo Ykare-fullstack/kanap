@@ -130,12 +130,12 @@ async function fectchPrices(){
     bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
     console.table(bufferLocalStorage);
 
-    for(let item in bufferLocalStorage){
+    for(let itemInBuffer in bufferLocalStorage){
 
-        let itemParsed = await retrieveItem(item.id);
-        console.log(itemParsed);
+        let itemParsedFromAPI = await retrieveItem(item.id);
+        console.log(itemParsedFromAPI);
 
-        if(itemParsed.price.value != item.price.value)
+        if(itemParsedFromAPI.price.value != itemInBuffer.price.value)
             priceVerification = false;
     }
     console.log(priceVerification);
@@ -231,7 +231,7 @@ function postForm(){
                 
                 //vérification de la validité du prix de chaque produit du panier
                 if(fectchPrices()){
-                    console.log(item.price.value);
+
                     //Création d'un tableau des id produits du panier depuis le buffer du local storage
                     let idProducts = [];
                     for (let i = 0; i<bufferLocalStorage.length;i++) {
