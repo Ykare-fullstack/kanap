@@ -230,11 +230,18 @@ function postForm(){
         document.getElementById("order").addEventListener("click", (event)=>{
             
             event.preventDefault();
-            //vérification de la validité du formulaire
-            if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
+
+            //vérification de la validité du prix de chaque produit du panier
+            if(!fectchPrices()){
+                alert("erreur de prix du produit");
+            }
+            else{
+
+                //vérification de la validité du formulaire
+                if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
                 
-                //vérification de la validité du prix de chaque produit du panier
-                if(fectchPrices()){
+                
+                
 
                     //Création d'un tableau des id produits du panier depuis le buffer du local storage
                     let idProducts = [];
@@ -280,11 +287,8 @@ function postForm(){
                     });
                 }
                 else{
-                    alert("erreur de prix du produit");
+                    alert("veuillez remplir le formulaire de commande");
                 }
-            }
-            else{
-                alert("veuillez remplir le formulaire de commande");
             }
         })  
 }
