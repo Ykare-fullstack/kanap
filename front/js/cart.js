@@ -233,7 +233,7 @@ function postForm(){
             event.preventDefault();
             fectchPrices();
             //vérification de la validité du prix de chaque produit du panier
-            if(!priceVerification){
+            if(priceVerification == false){
                 alert("erreur de prix du produit");
             }
             else{
