@@ -246,7 +246,7 @@ function postForm(){
             console.log(priceTest);
 
             //vérification de la validité du prix de chaque produit du panier
-            if(!priceTest){
+            if(!priceTest.value){
                 alert("erreur de prix du produit");
                 location.reload();
             }
