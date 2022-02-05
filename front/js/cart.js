@@ -139,10 +139,10 @@ async function fectchPrices(){
         console.log(itemFromAPI.price);
         console.log(produit.price);
 
-        if(itemFromAPI.price != produit.price)
-            priceVerification = false;
-        else
+        if(itemFromAPI.price == produit.price)
             priceVerification = true;
+        else
+            priceVerification = false;
         });
     }
     console.log(priceVerification);
@@ -235,7 +235,7 @@ function postForm(){
             event.preventDefault();
 
             //vérification de la validité du prix de chaque produit du panier
-            if(!fectchPrices()){
+            if(fectchPrices() == false){
                 alert("erreur de prix du produit");
             }
             else{
