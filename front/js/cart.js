@@ -9,13 +9,21 @@ let fieldVerificationCity = false;
 let fieldVerificationEmail = false;
 let fieldVerificationAddress = false;
 let priceVerification;
+
+function init() {
+    // Clear forms here
+    document.getElementById('firstName').innerHTML="";
+    document.getElementById('lastName').innerHTML="";
+    document.getElementById('email').innerHTML="";
+    document.getElementById('city').innerHTML="";
+    document.getElementById('address').innerHTML="";
+}
+window.onload = init;
+
+
 function displayCart()
 {
-    document.getElementById('firstName').innerHTML='';
-    document.getElementById('lastName').innerHTML='';
-    document.getElementById('email').innerHTML='';
-    document.getElementById('city').innerHTML='';
-    document.getElementById('address').innerHTML='';
+    
     if (bufferLocalStorage === null || bufferLocalStorage == 0) 
     { 
         document.getElementById('cart__items').innerHTML = '<p>Votre panier est vide</p>';
