@@ -235,6 +235,7 @@ function postForm(){
             //vérification de la validité du prix de chaque produit du panier
             if(priceVerification == false){
                 alert("erreur de prix du produit");
+                location.reload();
             }
             else{
 
@@ -286,6 +287,7 @@ function postForm(){
                 }
                 else{
                     alert("veuillez remplir le formulaire de commande");
+                    location.reload();
                 }
             }
         })  
