@@ -11,14 +11,14 @@ let fieldVerificationAddress = false;
 let priceVerification;
 
 function init() {
-    // Clear forms here
+    // mise à zéro du formulaire au chargement
     document.getElementById('firstName').innerHTML="";
     document.getElementById('lastName').innerHTML="";
     document.getElementById('email').innerHTML="";
     document.getElementById('city').innerHTML="";
     document.getElementById('address').innerHTML="";
 }
-window.onload = init;
+init();
 
 
 function displayCart()
