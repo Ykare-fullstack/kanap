@@ -152,7 +152,7 @@ async function fectchPrices(){
             priceVerification = true;
         });
     }
-    console.log(priceVerification);       
+    console.log(await priceVerification);       
 }
 
 //---------------------------------------------------------------------------------
@@ -232,14 +232,16 @@ formValidation();
 //---------------------------------------------------------------------------------
 //Envoi des informations client au localstorage
 
-function postForm(){
+async function postForm(){
 
     
         //au clic sur "commander"
         document.getElementById("order").addEventListener("click", (event)=>{
             
             event.preventDefault();
-            fectchPrices();
+
+            await fectchPrices();
+
             //vérification de la validité du prix de chaque produit du panier
             if(priceVerification == false){
                 alert("erreur de prix du produit");
