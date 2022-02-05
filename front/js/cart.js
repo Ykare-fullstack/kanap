@@ -12,11 +12,11 @@ let priceVerification;
 
 function init() {
     // mise à zéro du formulaire au chargement
-    document.getElementById('firstName').innerHTML="";
-    document.getElementById('lastName').innerHTML="";
-    document.getElementById('email').innerHTML="";
-    document.getElementById('city').innerHTML="";
-    document.getElementById('address').innerHTML="";
+    document.getElementById('firstName').value="";
+    document.getElementById('lastName').value="";
+    document.getElementById('email').value="";
+    document.getElementById('city').value="";
+    document.getElementById('address').value="";
 }
 init();
 
@@ -246,6 +246,11 @@ function postForm(){
                 location.reload();
             }
             else{
+                console.log(fieldVerificationFirstName);
+                console.log(fieldVerificationLastName);
+                console.log(fieldVerificationAddress);
+                console.log(fieldVerificationCity);
+                console.log(fieldVerificationEmail);
 
                 //vérification de la validité du formulaire
                 if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
