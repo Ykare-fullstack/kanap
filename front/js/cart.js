@@ -119,7 +119,7 @@ itemSuppression();
 
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API
 async function fectchPrices(){
-    let priceVerification = true;
+    let priceVerification;
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
 
@@ -134,12 +134,15 @@ async function fectchPrices(){
             return apiAnswer.json();
         })
         .then(async function (itemFromAPI) {
-        console.log(itemFromAPI);
+
 
         console.log(itemFromAPI.price);
         console.log(produit.price);
+
         if(itemFromAPI.price != produit.price)
             priceVerification = false;
+        else
+            priceVerification = true;
         });
     }
     console.log(priceVerification);
@@ -240,9 +243,6 @@ function postForm(){
                 //vérification de la validité du formulaire
                 if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
                 
-                
-                
-
                     //Création d'un tableau des id produits du panier depuis le buffer du local storage
                     let idProducts = [];
                     for (let i = 0; i<bufferLocalStorage.length;i++) {
