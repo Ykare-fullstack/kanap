@@ -142,7 +142,6 @@ async function fectchPrices(){
         })
         .then(async function (itemFromAPI) {
 
-
         console.log(itemFromAPI.price);
         console.log(produit.price);
 
@@ -152,7 +151,8 @@ async function fectchPrices(){
             priceVerification = true;
         });
     }
-    console.log(await priceVerification);       
+    console.log(priceVerification);
+    return priceVerification;      
 }
 
 //---------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ formValidation();
 //---------------------------------------------------------------------------------
 //Envoi des informations client au localstorage
 
-async function postForm(){
+function postForm(){
 
     
         //au clic sur "commander"
@@ -240,10 +240,10 @@ async function postForm(){
             
             event.preventDefault();
 
-            await fectchPrices();
+            fectchPrices();
 
             //vérification de la validité du prix de chaque produit du panier
-            if(priceVerification == false){
+            if(!fectchPrices()){
                 alert("erreur de prix du produit");
                 location.reload();
             }
