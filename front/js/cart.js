@@ -8,7 +8,7 @@ let fieldVerificationLastName = false;
 let fieldVerificationCity = false;
 let fieldVerificationEmail = false;
 let fieldVerificationAddress = false;
-
+let priceVerification;
 function displayCart()
 {
     document.getElementById('firstName').innerHTML='';
@@ -119,7 +119,6 @@ itemSuppression();
 
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API
 async function fectchPrices(){
-    let priceVerification;
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
 
@@ -145,8 +144,7 @@ async function fectchPrices(){
             priceVerification = false;
         });
     }
-    console.log(priceVerification);
-    return priceVerification;       
+    console.log(priceVerification);       
 }
 
 //---------------------------------------------------------------------------------
@@ -233,9 +231,9 @@ function postForm(){
         document.getElementById("order").addEventListener("click", (event)=>{
             
             event.preventDefault();
-
+            fectchPrices();
             //vérification de la validité du prix de chaque produit du panier
-            if(fectchPrices() == false){
+            if(!priceVerification){
                 alert("erreur de prix du produit");
             }
             else{
