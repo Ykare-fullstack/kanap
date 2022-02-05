@@ -8,7 +8,7 @@ let fieldVerificationLastName = false;
 let fieldVerificationCity = false;
 let fieldVerificationEmail = false;
 let fieldVerificationAddress = false;
-let priceVerification;
+
 
 function init() {
     // mise à zéro du formulaire au chargement
@@ -129,6 +129,7 @@ itemSuppression();
 async function fectchPrices(){
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
+    var priceVerification;
 
     for(let produit of bufferPriceTest){
 
@@ -240,10 +241,12 @@ function postForm(){
             
             event.preventDefault();
 
-            fectchPrices();
+            let priceTest;
+            priceTest = fectchPrices();
+            console.log(priceTest);
 
             //vérification de la validité du prix de chaque produit du panier
-            if(!fectchPrices()){
+            if(!priceTest){
                 alert("erreur de prix du produit");
                 location.reload();
             }
