@@ -138,10 +138,10 @@ async function fectchPrices(){
         console.log(itemFromAPI.price);
         console.log(produit.price);
 
-        if(itemFromAPI.price == produit.price)
-            priceVerification = true;
-        else
+        if(itemFromAPI.price != produit.price)
             priceVerification = false;
+        else
+            priceVerification = true;
         });
     }
     console.log(priceVerification);       
