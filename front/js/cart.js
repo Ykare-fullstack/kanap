@@ -139,7 +139,7 @@ async function fectchPrices(){
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
-            apiAnswer = apiAnswer.json();
+            return apiAnswer.json();
         })
         .then((itemFromAPI) => {
 
