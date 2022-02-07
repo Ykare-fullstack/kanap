@@ -129,7 +129,6 @@ itemSuppression();
 async function fectchPrices(){
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
-    var priceVerification;
 
     for(let produit of bufferPriceTest){
 
@@ -143,15 +142,15 @@ async function fectchPrices(){
         })
         .then((itemFromAPI) => {
 
-        console.log(itemFromAPI.price);
-        console.log(produit.price);
+            console.log(itemFromAPI.price);
+            console.log(produit.price);
 
-        if(itemFromAPI.price == produit.price){
-            return true;
-        }
-        else{
-            return false;
-        }
+            if(itemFromAPI.price == produit.price){
+                return true;
+            }
+            else{
+                return false;
+            }
         });
     }    
 }
@@ -246,7 +245,7 @@ function postForm(){
             console.log(priceTest);
 
             //vérification de la validité du prix de chaque produit du panier
-            if(!priceTest.value){
+            if(!priceTest){
                 alert("erreur de prix du produit");
                 location.reload();
             }
