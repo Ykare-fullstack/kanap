@@ -146,11 +146,11 @@ async function fectchPrices(){
         console.log(itemFromAPI.price);
         console.log(produit.price);
 
-        if(itemFromAPI.price != produit.price){
-            return false;
+        if(itemFromAPI.price == produit.price){
+            return true;
         }
         else{
-            return true;
+            return false;
         }
         });
     }    
