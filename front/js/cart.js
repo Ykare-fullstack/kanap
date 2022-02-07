@@ -129,7 +129,7 @@ itemSuppression();
 async function fectchPrices(){
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
-
+    let priceVerification = true;
     for(let produit of bufferPriceTest){
 
         console.table(produit);
@@ -145,14 +145,13 @@ async function fectchPrices(){
             console.log(itemFromAPI.price);
             console.log(produit.price);
 
-            if(itemFromAPI.price == produit.price){
-                return true;
+            if(itemFromAPI.price != produit.price){
+                priceVerification = false;
             }
-            else{
-                return false;
-            }
+            
         });
-    }    
+    }  
+    return priceVerification;  
 }
 
 //---------------------------------------------------------------------------------
