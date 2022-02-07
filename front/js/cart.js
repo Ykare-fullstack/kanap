@@ -147,15 +147,13 @@ async function fectchPrices(){
         console.log(produit.price);
 
         if(itemFromAPI.price != produit.price){
-            priceVerification = false;
+            return false;
         }
         else{
-            priceVerification = true;
+            return true;
         }
         });
-    }
-    console.log(priceVerification);
-    return priceVerification;      
+    }    
 }
 
 //---------------------------------------------------------------------------------
