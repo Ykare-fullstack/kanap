@@ -145,7 +145,7 @@ function fectchPrices(){
 
             console.log(itemFromAPI.price);
             console.log(produit.price); 
-            await testPrice(itemFromAPI.price,produit.price);          
+            testPrice(itemFromAPI.price,produit.price);          
         });
     }    
 }
