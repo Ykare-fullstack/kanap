@@ -27,8 +27,7 @@ function fillProductPage (id) {
             let itemColor = document.createElement("option");
             document.getElementById('colors').appendChild(itemColor);
             itemColor.value = color;
-            itemColor.innerHTML = color;
-            
+            itemColor.innerHTML = color;         
         }
     })
 }
