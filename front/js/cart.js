@@ -140,6 +140,8 @@ function fectchPrices(){
         .then((apiAnswer) => {
             console.log(apiAnswer);
             testPrice(apiAnswer.json().price,produit.price);
+            console.log(apiAnswer.json().price);
+            console.log(produit.price);
 
         });
 
