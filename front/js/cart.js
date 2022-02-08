@@ -3,6 +3,7 @@ console.log(window.localStorage);
 //Initialisation du buffer de local storage
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
+let priceVerification = true;
 let fieldVerificationFirstName = false;
 let fieldVerificationLastName = false;
 let fieldVerificationCity = false;
@@ -129,7 +130,7 @@ itemSuppression();
 async function fectchPrices(){
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
-    let priceVerification = true;
+    
     for(let produit of bufferPriceTest){
 
         console.table(produit);
@@ -143,16 +144,18 @@ async function fectchPrices(){
         .then((itemFromAPI) => {
 
             console.log(itemFromAPI.price);
-            console.log(produit.price);
-
-            if(itemFromAPI.price != produit.price){
-                priceVerification = false;
-                console.log(priceVerification);
-            }
-            
+            console.log(produit.price); 
+            testPrice(itemFromAPI.price,produit.price);          
         });
-    }  
-    return priceVerification;  
+    }    
+}
+
+function testPrice(priceAPI,priceCart)
+{
+    if(priceAPI != priceCart){
+        priceVerification = false;
+        console.log(priceVerification);
+    }
 }
 
 //---------------------------------------------------------------------------------
@@ -240,12 +243,10 @@ function postForm(){
             
             event.preventDefault();
 
-            let priceTest;
-            priceTest = fectchPrices();
-            console.log(priceTest);
+            fectchPrices();
 
             //vérification de la validité du prix de chaque produit du panier
-            if(!priceTest){
+            if(!priceVerification){
                 alert("erreur de prix du produit");
                 location.reload();
             }
