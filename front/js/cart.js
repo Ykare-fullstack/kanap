@@ -139,8 +139,8 @@ function fectchPrices(){
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
-            apiAnswerJSON = apiAnswer.json();
-            
+            apiAnswerJSON = await apiAnswer.json();
+
             console.log(apiAnswerJSON);
             console.log(apiAnswerJSON.price);
             console.log(produit.price);
