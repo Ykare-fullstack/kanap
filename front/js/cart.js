@@ -139,11 +139,10 @@ function fectchPrices(){
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
-            return apiAnswer.json();
-        })
-        .then((itemFromAPI) => {
-            testPrice(itemFromAPI.price,produit.price);          
+            testPrice(apiAnswer.json().price,produit.price);
+
         });
+
     }    
 }
 
