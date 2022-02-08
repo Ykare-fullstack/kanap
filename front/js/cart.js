@@ -139,7 +139,7 @@ async function fectchPrices(){
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
-            return apiAnswer.json();
+            return await apiAnswer.json();
         })
         .then((itemFromAPI) => {
 
@@ -235,7 +235,7 @@ formValidation();
 //---------------------------------------------------------------------------------
 //Envoi des informations client au localstorage
 
-async function postForm(){
+function postForm(){
 
     
         //au clic sur "commander"
@@ -243,7 +243,7 @@ async function postForm(){
             
             event.preventDefault();
 
-            await fectchPrices();
+            fectchPrices();
 
             //vérification de la validité du prix de chaque produit du panier
             if(!priceVerification){
