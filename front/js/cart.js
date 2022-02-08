@@ -127,7 +127,7 @@ itemSuppression();
 
 
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API
-async function fectchPrices(){
+function fectchPrices(){
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
     
@@ -139,13 +139,14 @@ async function fectchPrices(){
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
-            return await apiAnswer.json();
+            setTimeout(1000);
+            return apiAnswer.json();
         })
         .then((itemFromAPI) => {
 
             console.log(itemFromAPI.price);
             console.log(produit.price); 
-            testPrice(itemFromAPI.price,produit.price);          
+            setTimeout(testPrice(itemFromAPI.price,produit.price),1000);          
         });
     }    
 }
