@@ -130,7 +130,7 @@ itemSuppression();
 function fectchPrices(){
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
-    
+    var timeoutTest;
     for(let produit of bufferPriceTest){
 
         console.table(produit);
@@ -139,14 +139,13 @@ function fectchPrices(){
         fetch("http://localhost:3000/api/products/"+ produit.idProduit)
         .then((apiAnswer) => {
             console.log(apiAnswer);
-            setTimeout(1000);
             return apiAnswer.json();
         })
         .then((itemFromAPI) => {
 
             console.log(itemFromAPI.price);
             console.log(produit.price); 
-            setTimeout(testPrice(itemFromAPI.price,produit.price),1000);          
+            timeoutTest = window.setTimeout(testPrice[1000,itemFromAPI.price,produit.price]);          
         });
     }    
 }
