@@ -145,7 +145,7 @@ function fectchPrices(){
 
             console.log(itemFromAPI.price);
             console.log(produit.price); 
-            timeoutTest = window.setTimeout(testPrice[1000,itemFromAPI.price,produit.price]);          
+            await testPrice(itemFromAPI.price,produit.price);          
         });
     }    
 }
