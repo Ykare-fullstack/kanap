@@ -142,17 +142,14 @@ function fectchPrices(){
             return apiAnswer.json();
         })
         .then((itemFromAPI) => {
-
-            console.log(itemFromAPI.price);
-            console.log(produit.price); 
             testPrice(itemFromAPI.price,produit.price);          
         });
     }    
 }
 
-async function testPrice(priceAPI,priceCart)
+function testPrice(priceAPI,priceCart)
 {
-    if(await priceAPI != priceCart){
+    if(priceAPI != priceCart){
         priceVerification = false;
         console.log(priceVerification);
     }
