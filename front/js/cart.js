@@ -142,7 +142,7 @@ function fectchPrices(){
             apiAnswerJSON = apiAnswer.json();
 
             console.log(apiAnswerJSON);
-            console.log(apiAnswerJSON.price);
+            console.log(apiAnswerJSON.value.price);
             console.log(produit.price);
 
             testPrice(apiAnswerJSON.price,produit.price);
