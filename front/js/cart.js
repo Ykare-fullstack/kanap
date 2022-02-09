@@ -158,17 +158,7 @@ async function testPrice(priceAPI,priceCart)
         console.log(priceVerification);
     }
 }
-
-
-
-const printAddress = async () => {
-    const a = await address;
-    console.log(a);
-  };
-  
-  printAddress();
-
-  
+ 
 //---------------------------------------------------------------------------------
 //Validation du formulaire
 function formValidation(){
@@ -246,11 +236,10 @@ formValidation();
 //---------------------------------------------------------------------------------
 //Envoi des informations client au localstorage
 
-async function postForm(){
-
+function postForm(){
     
         //au clic sur "commander"
-        document.getElementById("order").addEventListener("click", (event)=>{
+        document.getElementById("order").addEventListener("click",async (event)=>{
             
             event.preventDefault();
 
