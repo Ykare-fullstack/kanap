@@ -125,30 +125,29 @@ function itemSuppression() {
 }
 itemSuppression();
 
+//---------------------------------------------------------------------------------
+//fonction de récupération d'un produit de l'api
+function fetchProduct(id){
+    const product = fetch("http://localhost:3000/api/products/"+ id)
+        .then((apiAnswer) =>
+            apiAnswer.json())
+        .then((res) => {
+            return res;
+        });
+    return product;
+}
 
+
+//---------------------------------------------------------------------------------
 //Fonction de vérification du prix de chaque article du panier selon les données de L'API
-function fectchPrices(){
+async function fectchPrices(){
+
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
     console.log(bufferPriceTest);
-    var timeoutTest;
+
     for(let produit of bufferPriceTest){
-
-        console.table(produit);
-        console.log(produit.idProduit);
-        
-        fetch("http://localhost:3000/api/products/"+ produit.idProduit)
-        .then((apiAnswer) => {
-            console.log(apiAnswer);
-            apiAnswerJSON = apiAnswer.json();
-
-            console.log(apiAnswerJSON);
-            console.log(apiAnswerJSON.value.price);
-            console.log(produit.price);
-
-            testPrice(apiAnswerJSON.price,produit.price);
-
-        });
-
+        var productFromAPI = await fetchProduct(produit.idProduit);
+        testPrice(productFromAPI.price,produit.price);
     }    
 }
 
@@ -160,6 +159,16 @@ function testPrice(priceAPI,priceCart)
     }
 }
 
+
+
+const printAddress = async () => {
+    const a = await address;
+    console.log(a);
+  };
+  
+  printAddress();
+
+  
 //---------------------------------------------------------------------------------
 //Validation du formulaire
 function formValidation(){
