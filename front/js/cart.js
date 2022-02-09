@@ -151,9 +151,9 @@ async function fectchPrices(){
     }    
 }
 
-function testPrice(priceAPI,priceCart)
+async function testPrice(priceAPI,priceCart)
 {
-    if(priceAPI != priceCart){
+    if(await priceAPI != priceCart){
         priceVerification = false;
         console.log(priceVerification);
     }
@@ -246,7 +246,7 @@ formValidation();
 //---------------------------------------------------------------------------------
 //Envoi des informations client au localstorage
 
-function postForm(){
+async function postForm(){
 
     
         //au clic sur "commander"
@@ -254,7 +254,7 @@ function postForm(){
             
             event.preventDefault();
 
-            fectchPrices();
+            await fectchPrices();
 
             //vérification de la validité du prix de chaque produit du panier
             if(!priceVerification){
