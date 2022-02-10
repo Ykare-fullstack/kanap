@@ -1,8 +1,8 @@
 
-console.log(window.localStorage);
 //Initialisation du buffer de local storage
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
+//indicateurs de test pour la validation de commande
 let priceVerification = true;
 let fieldVerificationFirstName = false;
 let fieldVerificationLastName = false;
@@ -21,10 +21,10 @@ function init() {
 }
 init();
 
-
+//---------------------------------------------------------------------------------
+//fonction d'affichage du panier
 function displayCart()
-{
-    
+{    
     if (bufferLocalStorage === null || bufferLocalStorage == 0) 
     { 
         document.getElementById('cart__items').innerHTML = '<p>Votre panier est vide</p>';
@@ -143,19 +143,17 @@ function fetchProduct(id){
 async function fectchPrices(){
 
     let bufferPriceTest = JSON.parse(window.localStorage.getItem("produit"));
-    console.log(bufferPriceTest);
 
     for(let produit of bufferPriceTest){
         var productFromAPI = await fetchProduct(produit.idProduit);
         testPrice(productFromAPI.price,produit.price);
     }    
 }
-
+//fonction de test du prix interne
 async function testPrice(priceAPI,priceCart)
 {
     if(await priceAPI != priceCart){
         priceVerification = false;
-        console.log(priceVerification);
     }
 }
  
@@ -233,6 +231,7 @@ function formValidation(){
 }
 formValidation();
 
+
 //---------------------------------------------------------------------------------
 //Envoi des informations client au localstorage
 
@@ -243,20 +242,15 @@ function postForm(){
             
             event.preventDefault();
 
+            //appel de la fonction de test du prix des/du produit(s)
             await fectchPrices();
 
-            //vérification de la validité du prix de chaque produit du panier
+            //vérification de la validité du prix de chaque produit du panier suite au test
             if(!priceVerification){
                 alert("erreur de prix du produit");
                 location.reload();
             }
             else{
-                console.log(fieldVerificationFirstName);
-                console.log(fieldVerificationLastName);
-                console.log(fieldVerificationAddress);
-                console.log(fieldVerificationCity);
-                console.log(fieldVerificationEmail);
-
                 //vérification de la validité du formulaire
                 if(fieldVerificationFirstName && fieldVerificationLastName && fieldVerificationAddress && fieldVerificationCity && fieldVerificationEmail){
                 
@@ -265,7 +259,6 @@ function postForm(){
                     for (let i = 0; i<bufferLocalStorage.length;i++) {
                         idProducts.push(bufferLocalStorage[i].idProduit);
                     }
-                    console.log(idProducts);
 
                     //Création de l'objet "order" avec les infos clients du formulaire
                     var order = {
@@ -278,9 +271,8 @@ function postForm(){
                         },
                         products: idProducts,
                     } 
-                    console.table(order);
 
-
+                    //en-tete pour l'envoi vers L'API
                     const postEnTete = {
                         method: 'POST',
                         body: JSON.stringify(order),
@@ -295,7 +287,6 @@ function postForm(){
                     .then((order) => {
                         localStorage.clear();
                         localStorage.setItem("orderId", order.orderId);
-                        console.log(localStorage);
 
                         document.location.href = "confirmation.html";
                     })

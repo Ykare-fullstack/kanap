@@ -2,19 +2,18 @@
 var string = window.location.href;
 var url = new URL(string);
 var id = url.searchParams.get("id");
-console.log(id);
 
+
+//fonction de remplissage de la page avec les informations de l'API
 function fillProductPage (id) {
 
     fetch("http://localhost:3000/api/products/" + id)
     .then((apiAnswer) => {
-        console.log(apiAnswer);
+
         return apiAnswer.json();
     })
     .then(async function (res) {
         item = await res;
-
-        console.table(item);
 
         document.getElementById('product_picture').alt = item.altTxt;
         document.getElementById('product_picture').src = item.imageUrl;
@@ -53,7 +52,6 @@ function addToCart() {
         imgUrl: document.getElementById('product_picture').src,
         imgAlt: document.getElementById('product_picture').alt
     };
-    console.log(productToAdd);
 
     //Initialisation du local storage
     let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
@@ -92,5 +90,4 @@ function addToCart() {
 }
 
 fillProductPage(id);
-addToCart();
-console.log(window.localStorage); 
+addToCart(); 
