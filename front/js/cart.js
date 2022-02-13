@@ -22,7 +22,7 @@ function init() {
 init();
 
 //---------------------------------------------------------------------------------
-//fonction d'affichage du panier
+//affichage du panier
 function displayCart()
 {    
     if (bufferLocalStorage === null || bufferLocalStorage == 0) 

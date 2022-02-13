@@ -1,10 +1,11 @@
 
+//récupération de l'id du produit via l'URL
 var string = window.location.href;
 var url = new URL(string);
 var id = url.searchParams.get("id");
 
-
-//fonction de remplissage de la page avec les informations de l'API
+//---------------------------------------------------------------------------------
+//remplissage de la page avec les informations de l'API
 function fillProductPage (id) {
 
     fetch("http://localhost:3000/api/products/" + id)
@@ -30,11 +31,13 @@ function fillProductPage (id) {
         }
     })
 }
+fillProductPage(id);
 
-//Gestion du panier
+//---------------------------------------------------------------------------------
+//Gestion de l'ajout au panier
 function addToCart() {
 
-    //eventListener implémenté au click "ajouter au panier" si 0<quantité<100
+    //eventListener implémenté au click "ajouter au panier" si 0 < quantité < 100
     document.getElementById('addToCart').addEventListener("click", (evenement)=>{
         if(document.getElementById('colors').value == 0)
             alert("veuillez sélectionner une couleur");
@@ -53,7 +56,7 @@ function addToCart() {
         imgAlt: document.getElementById('product_picture').alt
     };
 
-    //Initialisation du local storage
+    //Initialisation du buffer local storage
     let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
 
@@ -68,7 +71,7 @@ function addToCart() {
 
             found.quantity = parseInt(productToAdd.quantity) + parseInt(found.quantity);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
-            alert('produit '+ productToAdd.name +' ajouté au panier existant');
+            alert('produit '+ productToAdd.name +' ajouté au panier');
 
         //si nouveau produit dans le panier
         } else {
@@ -76,7 +79,7 @@ function addToCart() {
             bufferLocalStorage.push(productToAdd);
             window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
 
-            alert('nouveau produit '+ productToAdd.name +' dans le panier existant');
+            alert('nouveau produit '+ productToAdd.name +' dans le panier');
         }
     //Si le panier est vide
     } else {
@@ -89,5 +92,5 @@ function addToCart() {
     }}});   
 }
 
-fillProductPage(id);
+
 addToCart(); 

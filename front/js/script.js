@@ -1,11 +1,12 @@
 
-
+//---------------------------------------------------------------------------------
 // fonction de récupération des données de L'API en promise
 async function retrieveItems() {
     var res = await fetch("http://localhost:3000/api/products");
     return await res.json();
 }
 
+//---------------------------------------------------------------------------------
 //fonction de récupération de la promise de l'API séparation dans un tableau et affichage dans la page d'accueil
 async function fillPageWithItems () {
     var list = await retrieveItems()
