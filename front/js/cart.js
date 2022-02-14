@@ -29,6 +29,7 @@ async function displayCart() {
     }
     else {
         for (let produit in bufferLocalStorage) {
+            console.log(await fetchProductPrice(bufferLocalStorage[produit].idProduit));
             document.getElementById("cart__items").insertAdjacentHTML('beforebegin',
 
                 '<article class="cart__item" data-id="{product-ID}" data-color="{product-color}">' +
@@ -68,6 +69,7 @@ async function displayPriceQuantityTotal() {
     for (var i = 0; i < quantityArray.length; ++i) {
         quantityTotal += quantityArray[i].valueAsNumber;
     }
+    console.log(quantityTotal);
 
     document.getElementById('totalQuantity').innerHTML = quantityTotal;
 
@@ -78,7 +80,7 @@ async function displayPriceQuantityTotal() {
     for (var i = 0; i < quantityArray.length; ++i) {
         priceTotal += (quantityArray[i].valueAsNumber * await fetchProductPrice(bufferLocalStorage[i].idProduit));
     }
-
+    console.log(priceTotal);
     document.getElementById('totalPrice').innerHTML = priceTotal;
 
 }
