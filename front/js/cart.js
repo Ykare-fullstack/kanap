@@ -3,7 +3,6 @@
 let bufferLocalStorage = JSON.parse(window.localStorage.getItem("produit"));
 
 //indicateurs de test pour la validation de commande
-let priceVerification = true;
 let fieldVerificationFirstName = false;
 let fieldVerificationLastName = false;
 let fieldVerificationCity = false;
