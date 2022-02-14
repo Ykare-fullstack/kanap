@@ -38,9 +38,9 @@ async function fetchProductPrice(id){
             apiAnswer.json())
         .then((res) => {
             console.table(res);
-            return await res.price;
+            return res.price;
         });
-    return productPrice;
+    return await productPrice;
 }
 
 //---------------------------------------------------------------------------------
