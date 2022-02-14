@@ -33,13 +33,14 @@ function fetchProduct(id) {
 
 function fetchProductPrice(id){
 
-    const product = fetch("http://localhost:3000/api/products/" + id)
+    const productPrice = fetch("http://localhost:3000/api/products/" + id)
         .then((apiAnswer) =>
             apiAnswer.json())
         .then((res) => {
-            return res;
+            console.table(res);
+            return res.price;
         });
-    return product.price;
+    return productPrice;
 }
 
 //---------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ async function displayCart() {
     }
     else {
         for (let produit in bufferLocalStorage) {
+
             console.log(bufferLocalStorage[produit]);
             console.log(bufferLocalStorage[produit].idProduit);
             console.log(await fetchProductPrice(bufferLocalStorage[produit].idProduit));
