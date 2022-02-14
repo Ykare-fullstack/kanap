@@ -50,7 +50,6 @@ function addToCart() {
         color : document.getElementById('colors').value,
         quantity : document.getElementById('quantity').value,
         name: document.getElementById('title').textContent,
-        price: document.getElementById('price').textContent,
         description: document.getElementById('description').textContent,
         imgUrl: document.getElementById('product_picture').src,
         imgAlt: document.getElementById('product_picture').alt
@@ -89,7 +88,7 @@ function addToCart() {
         window.localStorage.setItem("produit", JSON.stringify(bufferLocalStorage));
         alert('nouveau produit '+ productToAdd.name +' dans le panier');
         
-    }}});   
+    }}});  
 }
 
 
