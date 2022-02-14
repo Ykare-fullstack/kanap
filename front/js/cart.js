@@ -240,6 +240,7 @@ function postForm(){
         //au clic sur "commander"
         document.getElementById("order").addEventListener("click",async (event)=>{
             
+            
             event.preventDefault();
 
             //appel de la fonction de test du prix des/du produit(s)
@@ -286,9 +287,7 @@ function postForm(){
                     .then((response) => response.json())
                     .then((order) => {
                         localStorage.clear();
-                        localStorage.setItem("orderId", order.orderId);
-
-                        document.location.href = "confirmation.html";
+                        document.location.href = 'confirmation.html?id='+order.orderId;
                     })
                     .catch((err) => {
                         alert ("Bug Fetch" + err.message);
