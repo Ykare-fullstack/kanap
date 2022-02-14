@@ -105,7 +105,7 @@ async function displayPriceQuantityTotal() {
     document.getElementById('totalPrice').innerHTML = priceTotal;
 
 }
-displayPriceQuantityTotal();
+setTimeout(displayPriceQuantityTotal,1000);
 
 //---------------------------------------------------------------------------------
 // modification de quantité d'un produit
