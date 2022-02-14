@@ -19,6 +19,28 @@ function init() {
     document.getElementById('address').value = "";
 }
 init();
+//---------------------------------------------------------------------------------
+//fonction de récupération d'un produit de l'api
+function fetchProduct(id) {
+    const product = fetch("http://localhost:3000/api/products/" + id)
+        .then((apiAnswer) =>
+            apiAnswer.json())
+        .then((res) => {
+            return res;
+        });
+    return product;
+}
+
+function fetchProductPrice(id){
+
+    const product = fetch("http://localhost:3000/api/products/" + id)
+        .then((apiAnswer) =>
+            apiAnswer.json())
+        .then((res) => {
+            return res;
+        });
+    return product.price;
+}
 
 //---------------------------------------------------------------------------------
 //affichage du panier
@@ -64,7 +86,7 @@ async function displayPriceQuantityTotal() {
     // scan de la page et incrémentation de la quantité
     var quantityArray = document.getElementsByClassName('itemQuantity');
     var quantityTotal = 0;
-
+    console.log(quantityArray);
     for (var i = 0; i < quantityArray.length; ++i) {
         quantityTotal += quantityArray[i].valueAsNumber;
     }
@@ -123,28 +145,6 @@ function itemSuppression() {
 }
 itemSuppression();
 
-//---------------------------------------------------------------------------------
-//fonction de récupération d'un produit de l'api
-function fetchProduct(id) {
-    const product = fetch("http://localhost:3000/api/products/" + id)
-        .then((apiAnswer) =>
-            apiAnswer.json())
-        .then((res) => {
-            return res;
-        });
-    return product;
-}
-
-function fetchProductPrice(id){
-
-    const product = fetch("http://localhost:3000/api/products/" + id)
-        .then((apiAnswer) =>
-            apiAnswer.json())
-        .then((res) => {
-            return res;
-        });
-    return product.price;
-}
 
 //---------------------------------------------------------------------------------
 //Validation du formulaire
