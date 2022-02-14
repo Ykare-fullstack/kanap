@@ -31,14 +31,14 @@ function fetchProduct(id) {
     return product;
 }
 
-function fetchProductPrice(id){
+async function fetchProductPrice(id){
 
     const productPrice = fetch("http://localhost:3000/api/products/" + id)
         .then((apiAnswer) =>
             apiAnswer.json())
         .then((res) => {
             console.table(res);
-            return res.price;
+            return await res.price;
         });
     return productPrice;
 }
