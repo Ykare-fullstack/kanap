@@ -50,6 +50,8 @@ async function displayCart() {
     }
     else {
         for (let produit in bufferLocalStorage) {
+            console.log(bufferLocalStorage[produit]);
+            console.log(bufferLocalStorage[produit].idProduit);
             console.log(await fetchProductPrice(bufferLocalStorage[produit].idProduit));
             document.getElementById("cart__items").insertAdjacentHTML('beforebegin',
 
