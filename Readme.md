@@ -123,3 +123,141 @@ Bonne soutenance avec une bonne présentation avec un plan de test bien fait et 
  L'etudiant est trés réactif par rapport aux retours sur les améliorations à apporter.
 
 Bon travail et bonne chance pour la suite de ton parcours  !
+
+</br>
+</br>
+</br>
+English version :
+-----------------------
+
+# Project 5 - OpenClassroom qualifying training program WebDev #
+
+## Build an e-shop website in Javascript ##
+
+![KanapLogo](./front/images/logo.png)
+</br>
+
+### Evaluated skills ###
+
+Based on the project evaluation criteria, define the level of acquisition of each particular skill as such :
+
+- [X] Validated - Comment if needed
+
+- [ ] Not validated - List all non-filled criteria
+
+ 
+</br>
+
+### 1. Interact with a web service using Javascript ###
+
+- [X] Validated
+
+Commentaries :
+
+- [X] Each required API call has been implemented :
+
+    GET / must return a table of all elements ;
+    GET /{product-ID} return the element linked to {product-ID}, product identifier ;
+    POST /order return contact element, product table and orderId 
+
+- [X] Student avoided callback hell using fetch.
+
+</br>
+
+### 2. Gérer des événements JavaScript ###
+
+- [X] Validated
+
+Commentaries :
+
+- [X] accueil page dynamically displays product from API.
+
+- [X] produit page dynamically display product details from an API.
+
+- [X] produit page grabs product Id to display in URL to request API (http://localhost:3000/api/products/{product-ID}), and not in localStorage.
+
+- [X] Alternative text for each picture is setup from API info.
+
+- [X] LocalStorage is used to deal with products added to cart.
+
+- [X] Price not stored in localStorage.
+
+- [X] Cart page displays all products chosen by the user as well as prices, quantity and colors.
+
+- [X] 2 of the same product are not displayed separately even if added sepparately in the cart.
+
+- [X] 2 products with different colors are displayed separately in the cart.
+
+- [X] On product and cart page, possibility of changing quantity.
+
+- [X] On panier page, possibility to delete an item.
+
+- [X] On order, orderId is displayed. orderId should be sent via Url and not via localStorage.
+
+Js code is readable :
+
+- [X] Indented source code.
+
+- [X] Each function is described with a comment.
+
+- [X] No code repetition.
+
+- [X] Reusable functions are used.
+
+- [X] Code use DOM creation of elements. 
+
+</br>
+
+### 3. Validate data from an out source ###
+
+- [X] Validated 
+
+Commentaries :
+
+Data validation performed in the code is valid :
+
+- [X] Users inputs are analysed via regex before beeing sent to the API.
+
+- [X] In case of a user input mistake an alert is displayed indicating the mistake.
+
+</br>
+
+### 4. Create a test plan ###
+
+- [X] Validated 
+
+Commentaries :
+
+Test plan is validated if :
+
+- [X] Test plan covers every functionality described in the document “Spécifications fonctionnelles et techniques Kanap”. 
+
+- [X] For each test the plan explains the test performed as well as expected results. 
+
+Delivrable
+
+Strong points :
+
+    Delivrable delivered on time
+    Structured presentation
+    Accurate presentation time
+    Fluid oral
+    Test plan correctly created
+
+After the oral presentation, the sudent has to improve on :
+
+    OrderId should not be sotres in the localStorage
+    price should not be stored in the localStorage
+
+Improvements axes :
+
+    try to conform to the given technical and functional spec.
+
+Oral presentation
+
+Commentaries :
+
+Great oral presentation with a well prepared test plan and satisfying answers to questions.
+The student is quick on catching and fixing shown mistake.
+
+Good work and good luck for the rest of your training  !
